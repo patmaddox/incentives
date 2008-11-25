@@ -15,5 +15,6 @@ Feature: Offering incentives
     Given an item named 'Gascan'
     And an incentive named '10% coupon'
     And '10% coupon' is given for orders containing 'Gascan'
+    And I have a cart
     When I add 'Gascan' to my cart
     Then I should qualify for '10% coupon'

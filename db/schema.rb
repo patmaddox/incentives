@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081125003825) do
+ActiveRecord::Schema.define(:version => 20081125184919) do
+
+  create_table "cart_items", :force => true do |t|
+    t.integer  "cart_id"
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "carts", :force => true do |t|
     t.integer  "total"
@@ -27,6 +34,12 @@ ActiveRecord::Schema.define(:version => 20081125003825) do
   end
 
   create_table "incentives", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "items", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

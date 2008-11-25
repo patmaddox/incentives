@@ -16,5 +16,12 @@ describe Incentive do
       i.add_criteria Cart, :total_greater_than, 50
       i.should have(1).criteria
     end
+
+    it "should convert activerecord objects into param form" do
+      item = mock_model(Item, :id => 123)
+      i = Incentive.new
+      i.add_criteria Cart, :containing_item, item
+      i.criteria.first.params.should == item.to_param
+    end
   end
 end
