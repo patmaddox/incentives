@@ -28,5 +28,9 @@ class IncentiveCriterium < ActiveRecord::Base
     def met_by?(object)
       @criteria.inject(@model) {|scope, c| c.executable_finder(scope) }.find_by_id(object.id)
     end
+
+    def +(other)
+      CompositeCriterium.new @model, *[other, @criteria].flatten
+    end
   end
 end

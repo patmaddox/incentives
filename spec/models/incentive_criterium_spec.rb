@@ -46,4 +46,35 @@ describe IncentiveCriterium do
       @ic.should_not be_met_by(@cart)
     end
   end
+
+  describe "composite criteria #met_by?" do
+    before(:each) do
+      @proxy = mock('proxy', :find_by_id => nil)
+      @ic1 = IncentiveCriterium.new :model => "Cart"
+      @ic1.stub!(:executable_finder).and_return @proxy
+      @ic2 = IncentiveCriterium.new :model => "Cart"
+      @ic2.stub!(:executable_finder).and_return @proxy
+      @ic3 = IncentiveCriterium.new :model => "Cart"
+      @ic3.stub!(:executable_finder).and_return @proxy
+      @composite = @ic1 + @ic2 + @ic3
+      @cart = mock_model(Cart, :id => 123)
+    end
+
+    it "should call the finder for each criterium" do
+      @ic1.should_receive(:executable_finder).and_return(@proxy)
+      @ic2.should_receive(:executable_finder).and_return(@proxy)
+      @ic3.should_receive(:executable_finder).and_return(@proxy)
+      @composite.met_by?(@cart)
+    end
+
+    it "should be false when it doesn't find anything" do
+      @proxy.should_receive(:find_by_id).with(@cart.id).and_return nil
+      @composite.should_not be_met_by(@cart)
+    end
+
+    it "should be true when it finds the cart" do
+      @proxy.should_receive(:find_by_id).with(@cart.id).and_return true
+      @composite.should be_met_by(@cart)
+    end
+end
 end
