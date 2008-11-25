@@ -8,6 +8,25 @@ class IncentiveCriterium < ActiveRecord::Base
   end
 
   def met_by?(object)
-    model.constantize.send(finder, *params).find_by_id(object.id)
+    executable_finder(model.constantize).find_by_id(object.id)
+  end
+
+  def executable_finder(scope)
+    scope.send(finder, *params)
+  end
+
+  def +(other_criteria)
+    CompositeCriterium.new model.constantize, self, other_criteria
+  end
+
+  class CompositeCriterium
+    def initialize(model, *criteria)
+      @model = model
+      @criteria = criteria
+    end
+
+    def met_by?(object)
+      @criteria.inject(@model) {|scope, c| c.executable_finder(scope) }.find_by_id(object.id)
+    end
   end
 end

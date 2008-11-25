@@ -7,6 +7,6 @@ class Incentive < ActiveRecord::Base
   end
 
   def met_by?(object)
-    criteria.first.met_by? object
+    criteria.inject {|sum, c| sum += c}.met_by?(object)
   end
 end
