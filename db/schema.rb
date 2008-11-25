@@ -9,7 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081125002656) do
+ActiveRecord::Schema.define(:version => 20081125003825) do
+
+  create_table "carts", :force => true do |t|
+    t.integer  "total"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "incentive_criteria", :force => true do |t|
     t.string   "model"
@@ -22,12 +28,6 @@ ActiveRecord::Schema.define(:version => 20081125002656) do
 
   create_table "incentives", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "orders", :force => true do |t|
-    t.integer  "total"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

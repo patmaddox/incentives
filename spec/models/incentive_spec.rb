@@ -13,7 +13,7 @@ describe Incentive do
   describe "add_criteria" do
     it "should create a new criterium for the incentive" do
       i = Incentive.new
-      i.add_criteria Order, :total_greater_than, 50
+      i.add_criteria Cart, :total_greater_than, 50
       i.should have(1).criteria
     end
   end

@@ -6,4 +6,8 @@ class IncentiveCriterium < ActiveRecord::Base
   def params
     Marshal.load encoded_params
   end
+
+  def met_by?(object)
+    model.constantize.send(finder, *params).find_by_id(object.id)
+  end
 end
