@@ -3,7 +3,7 @@
 <% @incentives.each do |i| %>
   <span><%= i.name %>
     (# of <%= i.model.pluralize %> matching:
-    <%= i.matching_count %>
+    <%= i.matching_count %>)
   </span><br/>
 <% end %>
 

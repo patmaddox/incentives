@@ -4,9 +4,19 @@
 
   <% form_for(:incentive, :url => incentives_url) do |form| %>
     Name: <%= form.text_field :name %><br/>
-    <% fields_for("criterium", IncentiveCriterium.new) do |f| %>
-      Total: <%= f.select :finder, {'>' => 'total_greater_than'} %><br/>
-      Value: <%= f.text_field :param %>
+    <% fields_for("criteria[]", IncentiveCriterium.new) do |f| %>
+      <%= check_box_tag "criteria[][enabled]" %>
+      Total: <%= f.select :finder, {'>' => 'total_greater_than'} %>
+      <%= f.text_field :param %>
+      <%= f.hidden_field :model, :value => "Cart" %>
+    <% end %>
+
+    <br/><br/>
+
+    <% fields_for("criteria[]", IncentiveCriterium.new) do |f| %>
+      <%= check_box_tag "criteria[][enabled]" %>
+      Containing item: <%= f.select :param, @items.map {|i| [i.name, i.id] } %>
+      <%= f.hidden_field :finder, :value => "containing_item" %>
       <%= f.hidden_field :model, :value => "Cart" %>
     <% end %>
 
