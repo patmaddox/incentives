@@ -24,4 +24,14 @@ describe Incentive do
       i.criteria.first.param.should == item.to_param
     end
   end
+
+  it "should know the number of items matching it" do
+    Cart.create! :total => 200
+    Cart.create! :total => 150
+    i = Incentive.new
+    i.add_criteria Cart, :total_greater_than, 175
+    i.save!
+
+    i.matching_count.should == 1
+  end
 end

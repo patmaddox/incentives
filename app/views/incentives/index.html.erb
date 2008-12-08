@@ -1,7 +1,10 @@
 <h2>The Incentives</h2>
 
 <% @incentives.each do |i| %>
-  <span><%= i.name %></span><br/>
+  <span><%= i.name %>
+    (# of <%= i.model.pluralize %> matching:
+    <%= i.matching_count %>
+  </span><br/>
 <% end %>
 
 <p><%= link_to "Create a new incentive", new_incentive_url %></p>
