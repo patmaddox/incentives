@@ -6,7 +6,7 @@
     Name: <%= form.text_field :name %><br/>
     <% fields_for("criteria[]", IncentiveCriterium.new) do |f| %>
       <%= check_box_tag "criteria[][enabled]" %>
-      Total: <%= f.select :finder, {'>' => 'total_greater_than'} %>
+      Total: <%= f.select :finder, {'>' => 'total_greater_than', '<' => 'total_less_than'} %>
       <%= f.text_field :param %>
       <%= f.hidden_field :model, :value => "Cart" %>
     <% end %>

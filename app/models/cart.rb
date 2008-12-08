@@ -3,6 +3,7 @@ class Cart < ActiveRecord::Base
   has_many :items, :through => :cart_items
   
   named_scope(:total_greater_than, lambda {|total| {:conditions => ['total > ?', total]}})
+  named_scope(:total_less_than, lambda {|total| {:conditions => ['total < ?', total]}})
   named_scope(:containing_item, lambda {|item| {:conditions => ['SELECT COUNT(*) FROM cart_items WHERE cart_items.cart_id=carts.id AND cart_items.item_id=?', item]}})
   
   def purchase(amount)
