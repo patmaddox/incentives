@@ -1,0 +1,17 @@
+<div id="build_incentive">
+  <h3>Build your incentive!</h3>
+  <hr/>
+
+  <% form_for(:incentive, :url => incentives_url) do |form| %>
+    Name: <%= form.text_field :name %><br/>
+    <% fields_for("criterium", IncentiveCriterium.new) do |f| %>
+      Total: <%= f.select :finder, {'>' => 'total_greater_than'} %><br/>
+      Value: <%= f.text_field :param %>
+      <%= f.hidden_field :model, :value => "Cart" %>
+    <% end %>
+
+    <br/>
+    <br/>
+    <%= submit_tag "Create!" %>
+  <% end %>
+</div>

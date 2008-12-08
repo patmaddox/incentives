@@ -21,7 +21,7 @@ describe Incentive do
       item = mock_model(Item, :id => 123)
       i = Incentive.new
       i.add_criteria Cart, :containing_item, item
-      i.criteria.first.params.should == item.to_param
+      i.criteria.first.param.should == item.to_param
     end
   end
 end

@@ -1,18 +1,10 @@
 class IncentiveCriterium < ActiveRecord::Base
-  def params=(params)
-    self.encoded_params = Marshal.dump(params)
-  end
-
-  def params
-    Marshal.load encoded_params
-  end
-
   def met_by?(object)
     executable_finder(model.constantize).find_by_id(object.id)
   end
 
   def executable_finder(scope)
-    scope.send(finder, *params)
+    scope.send(finder, param)
   end
 
   def +(other_criteria)

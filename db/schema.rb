@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081125184919) do
+ActiveRecord::Schema.define(:version => 20081208185847) do
 
   create_table "cart_items", :force => true do |t|
     t.integer  "cart_id"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20081125184919) do
   create_table "incentive_criteria", :force => true do |t|
     t.string   "model"
     t.string   "finder"
-    t.string   "encoded_params"
+    t.string   "param"
     t.integer  "incentive_id"
     t.datetime "created_at"
     t.datetime "updated_at"

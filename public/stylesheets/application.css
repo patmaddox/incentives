@@ -1,0 +1,26 @@
+#content {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#available_fields {
+    border: 1px solid #000;
+    width: 180px;
+    margin-right: 40px;
+    float: left;
+}
+
+#build_incentive {
+    border: 1px solid #000;
+    padding: 15px;
+    width: 40%;
+    float: left;
+}
+
+#build_incentive h3 {
+    margin-top: 5px;
+}
+
+#incentive_fields {
+    border: 1px red solid;
+}
