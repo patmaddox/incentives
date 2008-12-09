@@ -1,0 +1,11 @@
+<h2>View a cart</h2>
+
+Contains:
+<ul>
+<% @cart.items.each do |i| %>
+  <li><%= i.name %></li>
+<% end %>
+</ul>
+
+Subtotal: $<%= @cart.subtotal %><br/>
+Total: $<%= @cart.total %>

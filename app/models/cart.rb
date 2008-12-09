@@ -25,14 +25,14 @@ class Cart < ActiveRecord::Base
   end
 
   def subtotal
-    self[:total]
+    self[:total].to_i
   end
 
   def total
     if @discount
-      @discount.apply self[:total]
+      @discount.apply self[:total].to_i
     else
-      self[:total]
+      self[:total].to_i
     end    
   end
 end

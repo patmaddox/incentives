@@ -1,0 +1,5 @@
+<h2>List Carts</h2>
+
+<% @carts.each do |c| %>
+  <%= link_to "#{c.items.count} items - $#{c.subtotal}", cart_url(c) %><br/>
+<% end %>
