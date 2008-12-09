@@ -7,5 +7,16 @@ Contains:
 <% end %>
 </ul>
 
-Subtotal: $<%= @cart.subtotal %><br/>
-Total: $<%= @cart.total %>
+<div>
+  Subtotal: $<%= @cart.subtotal %><br/>
+  Total: $<%= @cart.total %>
+</div>
+
+<div>
+<h4>Available Incentives</h4>
+
+<ul>
+  <% @cart.incentive_campaigns.each do |ic| %>
+    <li><%= ic.name %></li>
+  <% end %>
+</ul>
