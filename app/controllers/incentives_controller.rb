@@ -10,11 +10,8 @@ class IncentivesController < ApplicationController
 
   def create
     @incentive = Incentive.new(params[:incentive])
-    params[:criteria].each do |criterium|
-      if criterium.delete(:enabled)
-        @incentive.criteria.build criterium
-      end
-    end
+    params[:criteria].each {|criterium| @incentive.criteria.build criterium }
+    
     if @incentive.save
       redirect_to incentives_url
     else

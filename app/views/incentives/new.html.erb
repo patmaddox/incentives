@@ -1,27 +1,33 @@
-<div id="build_incentive">
-  <h3>Build your incentive!</h3>
-  <hr/>
+<ul id="available_fields">
+  <li class="field">Total</li>
+  <li class="field">Item</li>
+</ul>
 
-  <% form_for(:incentive, :url => incentives_url) do |form| %>
-    Name: <%= form.text_field :name %><br/>
+<span style='display: none'>
+  <span id='total_template'>
     <% fields_for("criteria[]", IncentiveCriterium.new) do |f| %>
-      <%= check_box_tag "criteria[][enabled]" %>
       Total: <%= f.select :finder, {'>' => 'total_greater_than', '<' => 'total_less_than'} %>
       <%= f.text_field :param %>
       <%= f.hidden_field :model, :value => "Cart" %>
     <% end %>
-
-    <br/><br/>
-
+  </span>
+  
+  <span id='item_template'>
     <% fields_for("criteria[]", IncentiveCriterium.new) do |f| %>
-      <%= check_box_tag "criteria[][enabled]" %>
       Containing item: <%= f.select :param, @items.map {|i| [i.name, i.id] } %>
       <%= f.hidden_field :finder, :value => "containing_item" %>
       <%= f.hidden_field :model, :value => "Cart" %>
     <% end %>
+  </span>
+</span>
 
-    <br/>
-    <br/>
+<div id="build_incentive">
+  <h3>Build your incentive!</h3>
+  <hr/>
+
+  <% form_for(:incentive, :url => incentives_url, :html => {:id => 'incentive_form'}) do |form| %>
+    Name: <%= form.text_field :name %><br/>
+
     <%= submit_tag "Create!" %>
   <% end %>
 </div>
