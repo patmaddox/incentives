@@ -5,6 +5,8 @@ class Cart < ActiveRecord::Base
   named_scope(:total_greater_than, lambda {|total| {:conditions => ['total > ?', total]}})
   named_scope(:total_less_than, lambda {|total| {:conditions => ['total < ?', total]}})
   named_scope(:containing_item, lambda {|item| {:conditions => ['SELECT COUNT(*) FROM cart_items WHERE cart_items.cart_id=carts.id AND cart_items.item_id=?', item]}})
+
+  attr_writer :discount
   
   def purchase(amount)
     update_attribute :total, total.to_i + amount
@@ -20,5 +22,17 @@ class Cart < ActiveRecord::Base
 
   def incentive_campaigns
     IncentiveCampaign.find(:all).select {|i| i.met_by?(self) }
+  end
+
+  def subtotal
+    self[:total]
+  end
+
+  def total
+    if @discount
+      @discount.apply self[:total]
+    else
+      self[:total]
+    end    
   end
 end

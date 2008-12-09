@@ -56,4 +56,27 @@ describe Cart do
       Cart.containing_item(item1).containing_item(item2).should_not include(with_one)
     end
   end
+
+  it "should know its subtotal" do
+    Cart.new(:total => 100).subtotal.should == 100
+  end
+
+  it "should know its total with no discount applied" do
+    Cart.new(:total => 100).total.should == 100
+  end
+
+  describe "with a discount applied" do
+    before(:each) do
+      @cart = Cart.new(:total => 100)
+      @cart.discount = PercentageDiscount.new(10)
+    end
+    
+    it "should know its subtotal" do
+      @cart.subtotal.should == 100
+    end
+
+    it "should have a discounted total" do
+      @cart.total.should == 90
+    end
+  end
 end
