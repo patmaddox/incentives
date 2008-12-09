@@ -1,0 +1,2 @@
+module IncentiveCampaignsHelper
+end

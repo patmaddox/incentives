@@ -1,0 +1,7 @@
+<h2>Create an incentive campaign</h2>
+
+<% form_for :incentive_campaign, :url => incentive_campaigns_url do |form| %>
+  Incentive: <%= form.select :incentive_id, @incentives.map {|i| [i.name, i.id] } %><br/>
+  Action: <%= form.select :action_id, @actions.map {|a| [a.name, a.id] } %><br/>
+  <%= form.submit "Create!" %>
+<% end %>

@@ -4,4 +4,8 @@ class MessageAction < ActiveRecord::Base
   def apply
     flash[:notice] = message if flash
   end
+
+  def name
+    message
+  end
 end

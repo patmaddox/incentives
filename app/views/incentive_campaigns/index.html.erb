@@ -1,0 +1,7 @@
+<h2>Incentive Campgains</h2>
+
+<% @incentive_campaigns.each do |ic| %>
+  <div><%= ic.name %></div>
+<% end %>
+
+<div><%= link_to "Create a new campaign", new_incentive_campaign_url %></div>
