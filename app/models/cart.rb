@@ -17,4 +17,8 @@ class Cart < ActiveRecord::Base
   def incentives
     Incentive.find(:all).select {|i| i.met_by?(self) }
   end
+
+  def incentive_campaigns
+    IncentiveCampaign.find(:all).select {|i| i.met_by?(self) }
+  end
 end
