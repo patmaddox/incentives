@@ -19,9 +19,9 @@ describe IncentivesController do
 
   describe "POST /incentives, multiple criteria" do
     def do_post
-      post :create, :incentive => {:name => "new incentive"},
-      :criteria => [{:finder => 'total_greater_than', :model => 'Cart', :param => 200},
-                   {:finder => 'containing_item', :model => 'Cart', :param => 1}]
+      post :create, :incentive => {:name => "new incentive", :model => 'Cart'},
+      :criteria => [{:finder => 'total_greater_than', :param => 200},
+                   {:finder => 'containing_item', :param => 1}]
     end
 
     it "should create a new incentive" do

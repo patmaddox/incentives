@@ -15,7 +15,8 @@ describe IncentiveCriterium do
       @proxy = mock('proxy', :find_by_id => nil)
       Cart.stub!(:my_finder).and_return @proxy
 
-      @ic = IncentiveCriterium.new :model => "Cart", :finder => "my_finder", :param => 1
+      incentive = Incentive.new :model => Cart
+      @ic = IncentiveCriterium.new :incentive => incentive, :finder => "my_finder", :param => 1
       @cart = stub_model(Cart, :id => 123)
     end
 
@@ -43,11 +44,12 @@ describe IncentiveCriterium do
   describe "composite criteria #met_by?" do
     before(:each) do
       @proxy = mock('proxy', :find_by_id => nil)
-      @ic1 = IncentiveCriterium.new :model => "Cart"
+      incentive = Incentive.new :model => Cart
+      @ic1 = IncentiveCriterium.new :incentive => incentive
       @ic1.stub!(:executable_finder).and_return @proxy
-      @ic2 = IncentiveCriterium.new :model => "Cart"
+      @ic2 = IncentiveCriterium.new :incentive => incentive
       @ic2.stub!(:executable_finder).and_return @proxy
-      @ic3 = IncentiveCriterium.new :model => "Cart"
+      @ic3 = IncentiveCriterium.new :incentive => incentive
       @ic3.stub!(:executable_finder).and_return @proxy
       @composite = @ic1 + @ic2 + @ic3
       @cart = mock_model(Cart, :id => 123)

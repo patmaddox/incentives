@@ -6,9 +6,8 @@
 <span style='display: none'>
   <span id='total_template'>
     <% fields_for("criteria[]", IncentiveCriterium.new) do |f| %>
-      Total: <%= f.select :finder, {'>' => 'total_greater_than', '<' => 'total_less_than'} %>
+      Total: <%= f.select :finder, [['>', 'total_greater_than'], ['<', 'total_less_than']] %>
       <%= f.text_field :param %>
-      <%= f.hidden_field :model, :value => "Cart" %>
     <% end %>
   </span>
   
@@ -16,7 +15,6 @@
     <% fields_for("criteria[]", IncentiveCriterium.new) do |f| %>
       Containing item: <%= f.select :param, @items.map {|i| [i.name, i.id] } %>
       <%= f.hidden_field :finder, :value => "containing_item" %>
-      <%= f.hidden_field :model, :value => "Cart" %>
     <% end %>
   </span>
 </span>
@@ -26,6 +24,7 @@
   <hr/>
 
   <% form_for(:incentive, :url => incentives_url, :html => {:id => 'incentive_form'}) do |form| %>
+    <%= form.hidden_field :model, :value => "Cart" %>
     Name: <%= form.text_field :name %><br/>
 
     <%= submit_tag "Create!" %>

@@ -4,10 +4,14 @@ class Incentive < ActiveRecord::Base
       inject {|sum, c| sum += c}
     end
   end
+
+  def model=(m)
+    self[:model] = m.to_s
+  end
   
-  def add_criteria(model, finder, param)
+  def add_criteria(finder, param)
     param = param.to_param if param.respond_to?(:to_param)
-    criteria.build(:model => model.to_s, :finder => finder.to_s, :param => param)
+    criteria.build(:finder => finder.to_s, :param => param)
   end
 
   def met_by?(object)
@@ -15,10 +19,10 @@ class Incentive < ActiveRecord::Base
   end
 
   def matching_count
-    criteria.sum.executable_finder.count
+    criteria.sum.executable_finder(model_class).count
   end
 
-  def model
-    criteria.first.model
+  def model_class
+    model.constantize
   end
 end

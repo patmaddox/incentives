@@ -1,4 +1,6 @@
 class IncentiveCriterium < ActiveRecord::Base
+  belongs_to :incentive
+  
   def met_by?(object)
     executable_finder(model_class).find_by_id(object.id)
   end
@@ -12,7 +14,7 @@ class IncentiveCriterium < ActiveRecord::Base
   end
 
   def model_class
-    model.constantize
+    incentive.model_class
   end
 
   class CompositeCriterium
